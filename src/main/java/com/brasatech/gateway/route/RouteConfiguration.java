@@ -17,17 +17,24 @@ public class RouteConfiguration {
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder, UriConfiguration uriConfiguration){
         String httpUri = uriConfiguration.getHttpbin();
+        String serverOne = uriConfiguration.getServerOne();
         return  builder.routes()
                 .route(p -> p
                         .path("/get")
                         .filters(f -> f.addRequestHeader("Hello", "World"))
-                        .uri("http://httpbin.org:80"))
+                        .uri(httpUri))
                 .route(p -> p
                         .host("*.circuitbreaker.com")
                         .filters(f -> f.circuitBreaker(config -> config
                                 .setName("mycmd")
                                 .setFallbackUri("forward:/fallback")))
-                        .uri("http://httpbin.org:80"))
+                        .uri(httpUri))
+                .route(p -> p
+                        .path("/public/*")
+                        .uri(serverOne))
+                .route(p -> p
+                        .path("/private/*")
+                        .uri(serverOne))
                 .build();
     }
 }

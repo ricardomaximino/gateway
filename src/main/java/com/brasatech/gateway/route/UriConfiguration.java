@@ -12,4 +12,8 @@ public class UriConfiguration {
     @Setter
     private String httpbin = "http://httpbin.org:80";
 
+    @Getter
+    @Setter
+    private String serverOne= "lb://server-one";
+
 }
