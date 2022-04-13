@@ -1,9 +1,49 @@
 server:
-  port: 8080
+  port: 9443
+  ssl:
+    enabled: true
+    Key-store: classpath:certs/brasatech-server.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
+    Key-alias: brasatech-server
+
+ 
+
 
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      metrics:
+        enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+#          github:
+#            client-id: 9484e4127e3482238e9d
+#            client-secret: 205e8e88f06bcb884e0df777885f564c91cfbf2a
+#            redirect-uri: "{baseUrl}/login/oauth2/code/github"
+          brasatech-gateway:
+            provider: keycloak
+            client-id: brasatech-gateway
+            client-secret: 9hgYiZbUQC0c30q3k7btpzIZ49eR9qZS
+            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            scope: openid
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: https://localhost:8443/realms/BrasaTech
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway        
 
 eureka:
   client:
