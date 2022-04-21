@@ -21,6 +21,7 @@ public class SecuriryConfig{
             .authenticated()
         .and()
             .oauth2Login();
+            
         return http.build();
     }
     

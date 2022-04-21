@@ -28,13 +28,13 @@ spring:
           gateway:
             provider: keycloak
             client-id: Gateway
-            client-secret: PHHU2y1SclLGa4fsrW37axV3u0nzqYS7
+            client-secret: iUlFnPr1YDFOwK1tAfsd9B61i2X7xqeb
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: https://localhost:9443/realms/BrasaTech
+            issuer-uri: https://brasatech.es:9443/realms/BrasaTech
 
 management:
   endpoint:
@@ -49,6 +49,6 @@ eureka:
   client:
     registerWithEureka: true
     serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_SERVER:http://brasatech.es:8761/eureka}
     healthcheck:
       enabled: true
