@@ -18,6 +18,9 @@ public class RouteConfiguration {
     public RouteLocator myRoutes(RouteLocatorBuilder builder, UriConfiguration uriConfiguration){
         String httpUri = uriConfiguration.getHttpbin();
         String serverOne = uriConfiguration.getServerOne();
+        String nginx = uriConfiguration.getNginx();
+        String keycloak = uriConfiguration.getKeycloak();
+        String thymeleaf = uriConfiguration.getThymeleaf();
         return  builder.routes()
                 .route(p -> p
                         .path("/get")
@@ -30,11 +33,26 @@ public class RouteConfiguration {
                                 .setFallbackUri("forward:/fallback")))
                         .uri(httpUri))
                 .route(p -> p
+                        .path("/config")
+                        .filters(f -> f.circuitBreaker(config -> config
+                                .setName("mycmd")
+                                .setFallbackUri("forward:/fallback")))
+                                .uri(nginx))
+                .route(p -> p
+                        .path("/")
+                        .filters(f -> f.circuitBreaker(config -> config
+                                .setName("mycmd")
+                                .setFallbackUri("forward:/fallback")))
+                                .uri(keycloak))
+                .route(p -> p
                         .path("/public/*")
                         .uri(serverOne))
                 .route(p -> p
                         .path("/private/*")
                         .uri(serverOne))
+                .route(p -> p
+                        .path("/hello/*","/index/*")
+                        .uri(thymeleaf))
                 .build();
     }
 }

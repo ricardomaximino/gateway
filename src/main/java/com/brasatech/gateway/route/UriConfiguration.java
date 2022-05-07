@@ -14,6 +14,19 @@ public class UriConfiguration {
 
     @Getter
     @Setter
-    private String serverOne= "lb://server-one";
+    private String serverOne = "lb://server-one";
+    
+    
+    @Getter
+    @Setter
+    private String nginx = "http://brasatech.es:81";
+
+    @Getter
+    @Setter
+    private String keycloak = "https://brasatech.es:9443";
+
+    @Getter
+    @Setter
+    private String thymeleaf = "lb://thymeleaf";
 
 }

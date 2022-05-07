@@ -27,14 +27,14 @@ spring:
 #            redirect-uri: "{baseUrl}/login/oauth2/code/github"
           gateway:
             provider: keycloak
-            client-id: Gateway
-            client-secret: iUlFnPr1YDFOwK1tAfsd9B61i2X7xqeb
-            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+            client-id: gateway
+            client-secret: c1Cn5EnGPrROxUsiNjzdOvB6Hyv5anS1
+            redirect-uri: "https://brasatech.es/login/oauth2/code/keycloak"
             scope: openid
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: https://brasatech.es:9443/realms/BrasaTech
+            issuer-uri: https://security.brasatech.es:9443/realms/BrasaTech
 
 management:
   endpoint:
