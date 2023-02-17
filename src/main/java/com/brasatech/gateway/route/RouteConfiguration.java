@@ -16,7 +16,6 @@ public class RouteConfiguration {
     }
     @Bean
     public RouteLocator myRoutes(RouteLocatorBuilder builder, UriConfiguration uriConfiguration){
-
         return  builder.routes()
                 .route(p -> p
                         .path("/get")
@@ -28,6 +27,18 @@ public class RouteConfiguration {
                                 .setName("mycmd")
                                 .setFallbackUri("forward:/fallback")))
                         .uri(uriConfiguration.getHttpbin()))
+                .route(p -> p
+                        .path("/config")
+                        .filters(f -> f.circuitBreaker(config -> config
+                                .setName("mycmd")
+                                .setFallbackUri("forward:/fallback")))
+                                .uri(uriConfiguration.getNginx()))
+                .route(p -> p
+                        .path("/")
+                        .filters(f -> f.circuitBreaker(config -> config
+                                .setName("mycmd")
+                                .setFallbackUri("forward:/fallback")))
+                                .uri(uriConfiguration.getKeycloak()))
                 .route(p -> p
                         .path("/public/*")
                         .uri(uriConfiguration.getThymeleaf()))

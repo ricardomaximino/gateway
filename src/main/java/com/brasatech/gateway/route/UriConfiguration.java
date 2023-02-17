@@ -15,4 +15,8 @@ public class UriConfiguration {
 
     private String thymeleaf= "https://localhost:8443";
 
+    private String keycloak = "https://localhost:9443";
+
+    private String nginx = "https://localhost:8000";
+
 }
