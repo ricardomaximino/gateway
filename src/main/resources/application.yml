@@ -1,13 +1,16 @@
 server:
-  port: 8443
+  port: 7443
   ssl:
     enabled: true
     Key-store: classpath:certs/brasatech-server.p12
     key-store-password: changeit
     key-store-type: PKCS12
     Key-alias: brasatech-server
+    trust-store: classpath:certs/truststore.p12
+    trust-store-password: changeit
+    trust-store-type: PKCS12
 
- 
+
 
 
 spring:
@@ -27,14 +30,14 @@ spring:
 #            redirect-uri: "{baseUrl}/login/oauth2/code/github"
           gateway:
             provider: keycloak
-            client-id: Gateway
-            client-secret: PHHU2y1SclLGa4fsrW37axV3u0nzqYS7
+            client-id: gateway
+            client-secret: H5l9Upgtp1GWVD4nwD0WVrku4JIQglmF
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: https://localhost:9443/realms/BrasaTech
+            issuer-uri: https://localhost:9443/realms/eutm-filing
 
 management:
   endpoint:
@@ -45,10 +48,10 @@ management:
       exposure:
         include: gateway        
 
-eureka:
-  client:
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
-    healthcheck:
-      enabled: true
+# eureka:
+#   client:
+#     registerWithEureka: true
+#     serviceUrl:
+#       defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}
+#     healthcheck:
+#       enabled: true
