@@ -10,7 +10,11 @@ server:
     trust-store-password: changeit
     trust-store-type: PKCS12
 
-
+logging:
+  level:
+    root: ERROR
+    org.springframework: DEBUG
+    org.hibernate: ERROR
 
 
 spring:
@@ -31,13 +35,13 @@ spring:
           gateway:
             provider: keycloak
             client-id: gateway
-            client-secret: H5l9Upgtp1GWVD4nwD0WVrku4JIQglmF
+            client-secret: yxFDHKUjHQu6n4DrZPxUUDoYn5H0kaL1
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
             scope: openid
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: https://localhost:9443/realms/eutm-filing
+            issuer-uri: https://keycloak.local:9443/realms/brasatech
 
 management:
   endpoint:

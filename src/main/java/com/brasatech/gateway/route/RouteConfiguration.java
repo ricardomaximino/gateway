@@ -40,10 +40,16 @@ public class RouteConfiguration {
                                 .setFallbackUri("forward:/fallback")))
                                 .uri(uriConfiguration.getKeycloak()))
                 .route(p -> p
+                        .path("/keycloak/*")
+                        .uri(uriConfiguration.getKeycloak()))
+                .route(p -> p
                         .path("/public/*")
                         .uri(uriConfiguration.getThymeleaf()))
                 .route(p -> p
                         .path("/private/*")
+                        .uri(uriConfiguration.getThymeleaf()))
+                .route(p -> p
+                        .path("/webjars/**", "/js/**", "/css/**", "/image/**", "/assets/**")
                         .uri(uriConfiguration.getThymeleaf()))
                 .build();
     }

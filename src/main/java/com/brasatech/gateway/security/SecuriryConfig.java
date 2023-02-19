@@ -13,8 +13,8 @@ public class SecuriryConfig{
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http){
         http.authorizeExchange()
-            .pathMatchers("/keycloak/**","/actuator/**","/public/**", "/get/**", "/delay/**")
-            .permitAll()
+            .pathMatchers("/keycloak/**","/actuator/**", "/get/**", "/delay/**").permitAll()
+            .pathMatchers("/webjars/**", "/js/**", "/css/**", "/image/**", "/assets/**").permitAll()
         .and()
             .authorizeExchange()
             .anyExchange()
